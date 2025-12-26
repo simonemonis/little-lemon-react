@@ -1,38 +1,121 @@
-.App {
-  text-align: center;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* COLORS */
+:root {
+  --green: #495E57;
+  --yellow: #F4CE14;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* NAVBAR */
+.nav {
+  background-color: white;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 16px 40px;
+}
+
+.nav-logo {
+  height: 40px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+/* HERO SECTION */
+.hero {
+  background-color: var(--green);
   color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
 }
 
-.App-link {
-  color: #61dafb;
+.hero-text {
+  max-width: 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero h1 {
+  color: var(--yellow);
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  margin-bottom: 20px;
+}
+
+.hero button {
+  background-color: var(--yellow);
+  border: none;
+  padding: 10px 18px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.hero-image {
+  width: 280px;
+  border-radius: 10px;
+}
+
+/* SPECIALS */
+.specials {
+  padding: 40px;
+  background-color: white;
+}
+
+.specials h2 {
+  color: var(--yellow);
+  margin-bottom: 20px;
+}
+
+.specials-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+}
+
+.card h3 {
+  color: var(--yellow);
+  margin-bottom: 10px;
+}
+
+.card button {
+  background-color: var(--yellow);
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.footer {
+  background-color: var(--green);
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
