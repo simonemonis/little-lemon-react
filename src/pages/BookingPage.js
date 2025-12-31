@@ -1,8 +1,15 @@
-function BookingPage() {
+import BookingForm from "../components/BookingForm";
+
+function BookingPage({ availableTimes, dispatch, submitForm }) {
   return (
-    <section>
+    <section style={{ padding: "40px" }}>
       <h1>Reserve a Table</h1>
-      <p>Booking form will go here.</p>
+
+      <BookingForm
+        availableTimes={availableTimes}
+        dispatch={dispatch}
+        submitForm={submitForm}
+      />
     </section>
   );
 }
