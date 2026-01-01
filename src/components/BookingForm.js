@@ -1,27 +1,48 @@
-/* global submitAPI */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";   // ✅ Add navigation
+import { submitAPI } from "../api";               // ✅ Correct import
 
-function BookingForm({ availableTimes, dispatch, submitForm }) {
+function BookingForm({ availableTimes, dispatch }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
 
+  const navigate = useNavigate(); // ✅ Create navigate function
+
+  // Update available times when date changes
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     setDate(selectedDate);
     dispatch({ type: "UPDATE_DATE", payload: selectedDate });
   };
 
+  // Validate form
+  useEffect(() => {
+    if (date && time && guests >= 1 && occasion) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [date, time, guests, occasion]);
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    submitForm({
+    const formData = {
       date,
       time,
       guests,
       occasion,
-    });
+    };
+
+    if (submitAPI(formData)) {
+      navigate("/confirmed");   // ✅ Redirect to confirmation page
+    } else {
+      alert("Reservation failed. Please try again.");
+    }
   };
 
   return (
@@ -60,7 +81,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
         min="1"
         max="20"
         value={guests}
-        onChange={(e) => setGuests(e.target.value)}
+        onChange={(e) => setGuests(Number(e.target.value))}
         required
       />
 
@@ -78,13 +99,14 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
 
       <button
         type="submit"
+        disabled={!isFormValid}
         style={{
-          backgroundColor: "#F4CE14",
+          backgroundColor: isFormValid ? "#F4CE14" : "#ccc",
           padding: "10px",
           border: "none",
           fontWeight: "bold",
           borderRadius: "6px",
-          cursor: "pointer",
+          cursor: isFormValid ? "pointer" : "not-allowed",
         }}
       >
         Submit Reservation
