@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";   // ✅ Add navigation
-import { submitAPI } from "../api";               // ✅ Correct import
+import { useNavigate } from "react-router-dom";
+import { submitAPI } from "../api";
 
 function BookingForm({ availableTimes, dispatch }) {
   const [date, setDate] = useState("");
@@ -9,16 +9,14 @@ function BookingForm({ availableTimes, dispatch }) {
   const [occasion, setOccasion] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const navigate = useNavigate(); // ✅ Create navigate function
+  const navigate = useNavigate();
 
-  // Update available times when date changes
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     setDate(selectedDate);
     dispatch({ type: "UPDATE_DATE", payload: selectedDate });
   };
 
-  // Validate form
   useEffect(() => {
     if (date && time && guests >= 1 && occasion) {
       setIsFormValid(true);
@@ -27,7 +25,6 @@ function BookingForm({ availableTimes, dispatch }) {
     }
   }, [date, time, guests, occasion]);
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -39,7 +36,7 @@ function BookingForm({ availableTimes, dispatch }) {
     };
 
     if (submitAPI(formData)) {
-      navigate("/confirmed");   // ✅ Redirect to confirmation page
+      navigate("/confirmed");
     } else {
       alert("Reservation failed. Please try again.");
     }
@@ -49,6 +46,7 @@ function BookingForm({ availableTimes, dispatch }) {
     <form
       onSubmit={handleSubmit}
       style={{ display: "grid", maxWidth: "300px", gap: "20px" }}
+      aria-label="Table reservation form"
     >
       <label htmlFor="res-date">Choose date</label>
       <input
@@ -65,6 +63,7 @@ function BookingForm({ availableTimes, dispatch }) {
         value={time}
         onChange={(e) => setTime(e.target.value)}
         required
+        aria-label="Select reservation time"
       >
         <option value="">Select time</option>
         {availableTimes.map((t) => (
@@ -91,6 +90,7 @@ function BookingForm({ availableTimes, dispatch }) {
         value={occasion}
         onChange={(e) => setOccasion(e.target.value)}
         required
+        aria-label="Select occasion"
       >
         <option value="">Select occasion</option>
         <option value="Birthday">Birthday</option>
@@ -100,6 +100,7 @@ function BookingForm({ availableTimes, dispatch }) {
       <button
         type="submit"
         disabled={!isFormValid}
+        aria-label="Submit table reservation"
         style={{
           backgroundColor: isFormValid ? "#F4CE14" : "#ccc",
           padding: "10px",

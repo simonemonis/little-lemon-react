@@ -4,6 +4,9 @@ import { useReducer } from "react";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import ConfirmedBooking from "./pages/ConfirmedBooking";
+import Chicago from "./components/Chicago";
+
+
 import { fetchAPI, submitAPI } from "./api";
 
 /* Reducer helpers */
@@ -39,8 +42,10 @@ function Main() {
 
   return (
     <Routes>
+      {/* Home */}
       <Route path="/" element={<HomePage />} />
 
+      {/* Booking */}
       <Route
         path="/booking"
         element={
@@ -52,10 +57,11 @@ function Main() {
         }
       />
 
-      <Route
-        path="/confirmed"
-        element={<ConfirmedBooking />}
-      />
+      {/* Confirmation */}
+      <Route path="/confirmed" element={<ConfirmedBooking />} />
+
+      {/* About / Chicago */}
+      <Route path="/about" element={<Chicago />} />
     </Routes>
   );
 }
