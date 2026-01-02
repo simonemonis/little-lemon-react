@@ -7,22 +7,10 @@ import ConfirmedBooking from "./pages/ConfirmedBooking";
 import Chicago from "./components/Chicago";
 
 
-import { fetchAPI, submitAPI } from "./api";
+import { submitAPI } from "./api";
+import { initializeTimes, updateTimes } from "./reducers/timesReducer";
 
-/* Reducer helpers */
-function initializeTimes() {
-  const today = new Date();
-  return fetchAPI(today);
-}
 
-function updateTimes(state, action) {
-  switch (action.type) {
-    case "UPDATE_DATE":
-      return fetchAPI(new Date(action.payload));
-    default:
-      return state;
-  }
-}
 
 function Main() {
   const navigate = useNavigate();
